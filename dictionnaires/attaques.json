@@ -1,0 +1,18 @@
+{"acier":{"bronze":20,"or":50,"fer":30,"titane":80}
+           ,"dragon":{"rugissement":20,"griffe":50,"bourrasque":30,"souffle":80}
+           ,"eau":{"bulle":20,"jet":50,"averse":30,"tsunami":80}
+           ,"electrik":{"statique":20,"tesla":50,"paralisie":30,"eclair":80}
+           ,"fee":{"poudre":20,"baguette":50,"marraine":30,"clochette":80}
+           ,"feu":{"briquet":20,"incendie":50,"lance-flamme":30,"lave":80}
+           ,"glace":{"glaçon":20,"tempete":50,"grêle":30,"iceberg":80}
+           ,"insecte":{"vol":20,"piqure":50,"ettouffement":30,"arraignée":80}
+           ,"combat":{"claque":20,"pied":50,"poing":30,"K.O":80}
+           ,"normal":{"normal":20,"sors du lot":50,"moins normal":30,"extraordinaire":80}
+           ,"plante":{"cactus":20,"veneneux":50,"liane":30,"plantage":80}
+           ,"poison":{"miasme":20,"intoxication":50,"nuee toxique":30,"empoisoiner":80}
+           ,"psy":{"suggestion":20,"envoutement":50,"hypnose":30,"telekinesie":80}
+           ,"roche":{"caillou":20,"rocher":50,"pierre":30,"éboulement":80}
+           ,"sol":{"terre":20,"fissure":50,"trou":30,"seisme":80}
+           ,"spectre":{"hante":20,"poltergeist":50,"effrayer":30,"possession":80}
+           ,"tenebre":{"crepuscule":20,"extinction":50,"nuit":30,"black-out":80}
+           ,"vol":{"brise":20,"cyclone":50,"bourrasque":30,"tornade":80}}

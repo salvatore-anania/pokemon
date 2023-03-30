@@ -1,0 +1,18 @@
+{"acier":{"PV":120,"attaque":4,"defense":3,"fort":["glace","roche","fee"],"faible":["feu","plante","acier","elctrik"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/steelix.png"}
+           ,"dragon":{"PV":110,"attaque":10,"defense":1,"fort":["dragon"],"faible":["acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/dragonite.png"}
+           ,"eau":{"PV":80,"attaque":9,"defense":1,"fort":["feu","sol","roche"],"faible":["eau","plante","dragon"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/blastoise.png"}
+           ,"electrik":{"PV":90,"attaque":8,"defense":2,"fort":["eau","vol"],"faible":["plante","electrik","dragon"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/pikachu.png"}
+           ,"fee":{"PV":100,"attaque":8,"defense":3,"fort":["combat","dragon","tenebre"],"faible":["poison","acier","plante"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/audino.png"}
+           ,"feu":{"PV":80,"attaque":9,"defense":2,"fort":["plante","glace","insecte","acier"],"faible":["feu","eau","roche","dragon"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/charizard.png"}
+           ,"glace":{"PV":110,"attaque":7,"defense":3,"fort":["plante","sol","vol","dragon"],"faible":["feu","eau","glace","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/regice.png"}
+           ,"insecte":{"PV":70,"attaque":6,"defense":1,"fort":["plante","psy","tenebre"],"faible":["feu","kombat","poison","vol","spectre","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/papillon.png"}
+           ,"combat":{"PV":90,"attaque":9,"defense":1,"fort":["normal","roche","glace","tenebre","acier"],"faible":["poison","vol","psy","insecte"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/hitmonchan.png"}
+           ,"normal":{"PV":80,"attaque":6,"defense":2,"fort":[],"faible":["acier","roche"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/raticate.png"}
+           ,"plante":{"PV":70,"attaque":5,"defense":1,"fort":["eau","roche","sol"],"faible":["feu","plante","poison","vol","insecte","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/venusaur.png"}
+           ,"poison":{"PV":90,"attaque":7,"defense":2,"fort":["plante","acier"],"faible":["poison","sol","roche","spectre"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/muk.png"}
+           ,"psy":{"PV":90,"attaque":8,"defense":4,"fort":["kombat","poison"],"faible":["psy","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/hypno.png"}
+           ,"roche":{"PV":120,"attaque":6,"defense":5,"fort":["feu","glace","vol","insecte"],"faible":["kombat","sol","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/onyx.png"}
+           ,"sol":{"PV":90,"attaque":7,"defense":3,"fort":["feu","elctrik","poison","roche","acier"],"faible":["plante","insecte"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/dugtrio.png"}
+           ,"spectre":{"PV":80,"attaque":8,"defense":2,"fort":["spectre","psy"],"faible":["acier","tenebre"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/gengar.png"}
+           ,"tenebre":{"PV":80,"attaque":7,"defense":3,"fort":["psy","spectre"],"faible":["kombat","tenebre","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/umbreon.png"}
+           ,"vol":{"PV":70,"attaque":9,"defense":2,"fort":["plante","kombat","insecte"],"faible":["elktrik","roche","acier"],"competences":{"1":20,"2":50,"3":30,"4":80},"image":"image/pidgeot.png"}}
