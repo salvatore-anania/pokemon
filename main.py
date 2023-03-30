@@ -3,6 +3,7 @@ from classes.Combat  import Combat
 from classes.Sauvegarde  import Sauvegarde
 from classes.Charger  import Charger
 import pygame
+sauvergarde=Charger()
 
 debutX=95
 largeur=100
@@ -32,7 +33,7 @@ eau=[range(debutX+largeur*5,debutX+largeur*6),range(debutY+hauteur*2,debutY+haut
 choix=[insecte,tenebre,dragon,electrik,fee,kombat,feu,vol,spectre,plante,sol,glace,normal,poison,psy,roche,acier,eau]
 
 pygame.init()
-save=Sauvegarde()
+saving=Sauvegarde()
 screen = pygame.display.set_mode((800,600))
 background=pygame.image.load("image/background.png")
 attaque=pygame.image.load("image/background_attack.png")
@@ -62,7 +63,8 @@ while running:
             if event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_RETURN:
-                        save.save(username)
+                        poke_exist=sauvergarde.lire_pokemon(username)
+                        saving.save(username)
                         screen.blit(connection,(0,0))
                         active=False
                         connect=True
@@ -77,17 +79,19 @@ while running:
         pygame.draw.rect(screen, color, input_box, 2)
         
         pygame.display.flip()
-    save_poke=Charger().lire_pokemon(username)
-    save_poke=save_poke.split(",")
     while choose<2:
         screen.blit(background,(0,0))
         screen.blit(types,(95,80))
         if choose==0:
             choose_pokemon = font.render("Choissisez le type du pokemon adverse", True, pygame.Color((63,72,204)))
             screen.blit(choose_pokemon,(400-choose_pokemon.get_width()/2,30))
-        else:
+        elif not poke_exist:
             choose_pokemon = font.render("Choissisez le type de votre pokemon", True, pygame.Color((63,72,204)))
             screen.blit(choose_pokemon,(400-choose_pokemon.get_width()/2,30))
+        elif pokemon1!=0:
+            poke_exist=sauvergarde.lire_pokemon(username)
+            pokemon2=Type(poke_exist[0],int(poke_exist[1]),poke_exist[2],poke_exist[3],float(poke_exist[4]),poke_exist[5])
+            choose=2
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -96,13 +100,16 @@ while running:
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pos()[0] in choix[pos][0] and pygame.mouse.get_pos()[1] in choix[pos][1]:
                         if choose==0:
-                            if pokemon2:
-                                choose=1
                             pokemon1=Type(pokemons[pos],1,pokemons[pos])
-                        else:
-                            if not pokemon2:
-                                pokemon2=Type(save_poke[0],int(save_poke[1]),save_poke[2],save_poke[3],float(save_poke[4]))
-                        choose+=1
+                            choose=1
+                        elif not pokemon2:
+                            print("test")
+                            pokemon2=Type(pokemons[pos],1,pokemons[pos])
+                            saving.save(username,pokemon2.get_save())
+                            poke_exist=sauvergarde.lire_pokemon(username)
+                            choose+=1
+        
+                        
         pygame.display.update()
     if choose==2:
         combat=Combat([pokemon1,pokemon2])
@@ -149,9 +156,13 @@ while running:
                         if combat.winner()==pokemon2:
                             pokemon2.exper()
                             pokemon2.evolution()
+                            print(pokemon2.get_save())
+                            saving.save(username,pokemon2.get_save())
+
                         else:
                             pokemon2.soin()
-                    elif pygame.mouse.get_pos()[0] in range(457,651) and pygame.mouse.get_pos()[1] in range(470,540):
-                        save.save(username,pokemon2.get_save())
+                            saving.save(username,pokemon2.get_save())
+                    if pygame.mouse.get_pos()[0] in range(457,651) and pygame.mouse.get_pos()[1] in range(470,540):
+                        saving.save(username,pokemon2.get_save())
                     
     pygame.display.update()

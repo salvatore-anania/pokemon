@@ -1,1 +1,1 @@
-{"salva": "moi,2,feu,False,59.5"}
+{"salva": ["moi", 7, "feu", "False", 38.0, 0], "gt": ["sol", 2, "sol", false, 36.79999999999998, 10], "test": ["electrik", 8, "electrik", false, 8.59999999999999, 0]}

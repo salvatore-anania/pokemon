@@ -7,7 +7,10 @@ class Charger:
     def lire_pokemon(self,user):
         with open("saves/data_user.json", "r") as affiche:
             test=load(affiche)
-        return test[user]
+        if user in test:
+            return test[user]
+        else:
+            return False
                 
     def lire_attaques(self,type1):
         with open("dictionnaires/attaques.json", "r") as affiche:

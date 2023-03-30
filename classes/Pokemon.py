@@ -1,12 +1,12 @@
 class Pokemon:
-    def __init__(self,name,niveau,PV,puissance_attaque,defense,vie_max):
+    def __init__(self,name,niveau,PV,puissance_attaque,defense,vie_max,XP=0):
         self.__name=name
         self.__vie_max=vie_max
         self.__point_de_vie=PV
         self.__niveau=niveau
         self.__puissance_attaque=puissance_attaque
         self.__defense=defense
-        self.__experience=0
+        self.__experience=XP
         
     def get_name(self):
         return self.__name
@@ -16,6 +16,9 @@ class Pokemon:
     
     def get_PV(self):
         return self.__point_de_vie
+    
+    def get_XP(self):
+        return self.__experience
     
     def get_niveau(self):
         return self.__niveau
@@ -46,6 +49,7 @@ class Pokemon:
         
     def exper(self):
         self.__experience+=10
+        print(self.__experience)
     
     def soin(self):
         self.__point_de_vie=self.__vie_max

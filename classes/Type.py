@@ -6,14 +6,14 @@ import json
 
 class Type(Pokemon):
     
-    def __init__(self,name="generique",niveau=1,type1="normal",type2=False,PV=False):
+    def __init__(self,name="generique",niveau=1,type1="normal",type2=False,PV=False,XP=0):
         self.__type1=type1
         self.__type2=type2
         self.__type_info=Charger().lire_types(self.__type1)
         if not PV:
             PV=self.__type_info["PV"]
         self.__attaques=Attaques(type1)
-        super().__init__(name,niveau,PV,self.__type_info["attaque"]+5*niveau,self.__type_info["defense"]+niveau*2,self.__type_info["PV"]+niveau*10)
+        super().__init__(name,niveau,PV,self.__type_info["attaque"]+5*niveau,self.__type_info["defense"]+niveau*2,self.__type_info["PV"]+niveau*10,XP)
 
     def get_image(self):
         return self.__type_info["image"]
@@ -36,4 +36,4 @@ class Type(Pokemon):
         return self.__attaques
     
     def get_save(self):
-        return f"{self.get_name()},{self.get_niveau()},{self.__type1},{self.__type2},{self.get_PV()}"
+        return (self.get_name(),self.get_niveau(),self.__type1,self.__type2,self.get_PV(),self.get_XP())

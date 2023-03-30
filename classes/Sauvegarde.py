@@ -5,6 +5,7 @@ class Sauvegarde:
         pass
     
     def save(self,user,pokemon=""):
+        
         try:
             open("saves/data_user.json", "x")
         except:
@@ -15,7 +16,7 @@ class Sauvegarde:
         except:
             ecrire.write("{\""+user+"\":\"0\"}")
         else:
-            if not(user in donnes.keys()):
+            if pokemon!="":
                 donnes[user] = pokemon
                 ecrire.seek(0)
                 ecrire.truncate(0)
