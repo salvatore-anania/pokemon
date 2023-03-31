@@ -28,6 +28,12 @@ class Pokemon:
     
     def get_defense(self):
         return self.__defense
+
+    def is_alive(self):
+        if self.__point_de_vie >0:
+            return True
+        else:
+            return False
     
     def set_name(self,name):
         self.__name=name
@@ -49,7 +55,6 @@ class Pokemon:
         
     def exper(self):
         self.__experience+=10
-        print(self.__experience)
     
     def soin(self):
         self.__point_de_vie=self.__vie_max

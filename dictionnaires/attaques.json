@@ -9,7 +9,7 @@
            ,"combat":{"claque":20,"pied":50,"poing":30,"K.O":80}
            ,"normal":{"normal":20,"sors du lot":50,"moins normal":30,"extraordinaire":80}
            ,"plante":{"cactus":20,"veneneux":50,"liane":30,"plantage":80}
-           ,"poison":{"miasme":20,"intoxication":50,"nuee toxique":30,"empoisoiner":80}
+           ,"poison":{"miasme":20,"intoxication":50,"nuee toxique":30,"empoisonner":80}
            ,"psy":{"suggestion":20,"envoutement":50,"hypnose":30,"telekinesie":80}
            ,"roche":{"caillou":20,"rocher":50,"pierre":30,"éboulement":80}
            ,"sol":{"terre":20,"fissure":50,"trou":30,"seisme":80}

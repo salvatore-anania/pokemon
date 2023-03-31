@@ -2,9 +2,34 @@ from classes.Type  import Type
 from classes.Combat  import Combat
 from classes.Sauvegarde  import Sauvegarde
 from classes.Charger  import Charger
+from classes.Equipe  import Equipe
+from random  import randint
 import pygame
 sauvergarde=Charger()
 
+def affiche_equipe(x,y,equipe):
+    for pokemon in equipe.get_equipe():
+            if pokemon.is_alive():
+                pokemon_image=pygame.image.load(pokemon.get_image())
+                screen.blit(pokemon_image,(x,y))
+                x+=50
+
+def affiche_poke_info(x,y,pokemon):
+    test=pokemon.affiche_infos().split(",",1)
+    pokemon_image=pygame.image.load(pokemon.get_image())
+    pokemon_info = font.render(test[0], True, pygame.Color((63,72,204)))
+    equipe_info = font.render(test[1], True, pygame.Color((63,72,204)))
+    screen.blit(pokemon_info,(x-pokemon_info.get_width()/2,y))
+    screen.blit(equipe_info,(x-equipe_info.get_width()/2,y+20))
+    screen.blit(pokemon_image,(x+200,y))
+
+def set_adversaire():
+    equipe=Equipe()
+    for i in range(6):
+        pos=randint(0,17)
+        equipe.add_pokemon(Type(pokemons[pos],1,pokemons[pos]))
+    return equipe
+            
 debutX=95
 largeur=100
 debutY=80
@@ -44,10 +69,9 @@ connection=pygame.image.load("image/connection.png")
 
 pokemons=["insecte","tenebre","dragon","electrik","fee","combat","feu","vol","spectre","plante","sol","glace","normal","poison","psy","roche"
           ,"acier","eau"]
-pokemon1=0
-pokemon2=0
+equipe=Equipe()
 running=True
-choose=0
+choose=False
 username=''
 color=(63,72,204)
 connect=False
@@ -64,6 +88,10 @@ while running:
                 if active:
                     if event.key == pygame.K_RETURN:
                         poke_exist=sauvergarde.lire_pokemon(username)
+                        if poke_exist:
+                            for pokemon_equipe in poke_exist:
+                                equipe.add_pokemon(Type(pokemon_equipe[0],int(pokemon_equipe[1]),pokemon_equipe[2],pokemon_equipe[3]
+                                                        ,float(pokemon_equipe[4]),pokemon_equipe[5]))
                         saving.save(username)
                         screen.blit(connection,(0,0))
                         active=False
@@ -79,54 +107,45 @@ while running:
         pygame.draw.rect(screen, color, input_box, 2)
         
         pygame.display.flip()
-    while choose<2:
-        screen.blit(background,(0,0))
-        screen.blit(types,(95,80))
-        if choose==0:
-            choose_pokemon = font.render("Choissisez le type du pokemon adverse", True, pygame.Color((63,72,204)))
+        equipeadverse=set_adversaire()
+            
+    while not choose:
+        if not equipe.complete():
+            screen.blit(background,(0,0))
+            screen.blit(types,(95,80))
+            choose_pokemon = font.render(f"Choissisez le type de vos pokemon : {len(equipe.get_equipe())}/6", True, pygame.Color((63,72,204)))
             screen.blit(choose_pokemon,(400-choose_pokemon.get_width()/2,30))
-        elif not poke_exist:
-            choose_pokemon = font.render("Choissisez le type de votre pokemon", True, pygame.Color((63,72,204)))
-            screen.blit(choose_pokemon,(400-choose_pokemon.get_width()/2,30))
-        elif pokemon1!=0:
-            poke_exist=sauvergarde.lire_pokemon(username)
-            pokemon2=Type(poke_exist[0],int(poke_exist[1]),poke_exist[2],poke_exist[3],float(poke_exist[4]),poke_exist[5])
-            choose=2
+        elif equipe.complete():
+            choose=True
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                choose=5
+                choose=True
             for pos in range(len(choix)):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pos()[0] in choix[pos][0] and pygame.mouse.get_pos()[1] in choix[pos][1]:
-                        if choose==0:
-                            pokemon1=Type(pokemons[pos],1,pokemons[pos])
-                            choose=1
-                        elif not pokemon2:
-                            print("test")
-                            pokemon2=Type(pokemons[pos],1,pokemons[pos])
-                            saving.save(username,pokemon2.get_save())
-                            poke_exist=sauvergarde.lire_pokemon(username)
-                            choose+=1
-        
-                        
+                        if not equipe.complete():
+                            equipe.add_pokemon(Type(pokemons[pos],1,pokemons[pos]))
+                            saving.save(username,equipe.get_save())
+                            poke_exist=sauvergarde.lire_pokemon(username)      
         pygame.display.update()
-    if choose==2:
-        combat=Combat([pokemon1,pokemon2])
-        choose+=1
+        
+    for pokemon in equipeadverse.get_equipe():
+        if pokemon.is_alive():
+            poke_choose_adverse=pokemon
+    for pokemon in equipe.get_equipe():
+        if pokemon.is_alive():
+            combat=Combat((poke_choose_adverse,pokemon))
+            poke_choose=pokemon
     screen.blit(attaque,(0,0))
     if not combat.winner_name():
         space=0
-        for pokemon in (pokemon1,pokemon2):
-            test=pokemon.affiche_infos().split(",",1)
-            pokemon_image=pygame.image.load(pokemon.get_image())
-            pokemon_info = font.render(test[0], True, pygame.Color((63,72,204)))
-            pokemon2_info = font.render(test[1], True, pygame.Color((63,72,204)))
-            screen.blit(pokemon_info,(200-pokemon_info.get_width()/2,space))
-            screen.blit(pokemon2_info,(200-pokemon2_info.get_width()/2,space+20))
-            screen.blit(pokemon_image,(400,space))
-            space+=200
-        for attaque_info in pokemon2.get_attaques().get_attaques():
+        affiche_poke_info(200,0,poke_choose_adverse)
+        affiche_poke_info(200,200,poke_choose)
+ 
+        affiche_equipe(0,50,equipeadverse)
+        affiche_equipe(0,250,equipe)
+        for attaque_info in poke_choose.get_attaques():
             attaque_infos = font.render(attaque_info[0], True, pygame.Color((182,122,87)))
             screen.blit(attaque_infos,(attaque_info[2][0]-attaque_infos.get_width()/2,attaque_info[2][1]))
         for event in pygame.event.get():
@@ -153,16 +172,17 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pos()[0] in range(181,360) and pygame.mouse.get_pos()[1] in range(470,540):
                         choose=0
-                        if combat.winner()==pokemon2:
-                            pokemon2.exper()
-                            pokemon2.evolution()
-                            print(pokemon2.get_save())
-                            saving.save(username,pokemon2.get_save())
-
+                        if combat.winner()==poke_choose:
+                            poke_choose.exper()
+                            poke_choose.evolution()
+                            saving.save(username,equipe.get_save())
+                            equipeadverse=set_adversaire()
                         else:
-                            pokemon2.soin()
-                            saving.save(username,pokemon2.get_save())
+                            for pokemon in equipe.get_equipe():
+                                pokemon.soin()
+                            saving.save(username,equipe.get_save())
                     if pygame.mouse.get_pos()[0] in range(457,651) and pygame.mouse.get_pos()[1] in range(470,540):
-                        saving.save(username,pokemon2.get_save())
-                    
+                        running=False
+                        saving.save(username,equipe.get_save())
+      
     pygame.display.update()

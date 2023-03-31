@@ -17,6 +17,7 @@ class Type(Pokemon):
 
     def get_image(self):
         return self.__type_info["image"]
+    
     def get_fort(self):
         return self.__type_info["fort"]
     
@@ -33,7 +34,7 @@ class Type(Pokemon):
         return self.__type_info["competences"]
     
     def get_attaques(self):
-        return self.__attaques
+        return self.__attaques.get_attaques()
     
     def get_save(self):
         return (self.get_name(),self.get_niveau(),self.__type1,self.__type2,self.get_PV(),self.get_XP())
