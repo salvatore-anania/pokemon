@@ -1,4 +1,4 @@
-from classes.Pokemon import Pokemon
+
 
 class Combat:
     def __init__(self,pokemons):
@@ -67,7 +67,7 @@ class Combat:
         defenseur=self.__pokemons[self.__defenseur]
 
         new_PV=defenseur.get_PV()
-        new_PV-=int(self.calcul_type_attack_power(attaquant,defenseur,competence)-defenseur.get_defense())
+        new_PV-=round(self.calcul_type_attack_power(attaquant,defenseur,competence)/defenseur.get_defense())
         defenseur.set_PV(new_PV)
         
     def looser(self):

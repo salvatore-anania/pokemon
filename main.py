@@ -27,7 +27,8 @@ def set_adversaire():
     equipe=Equipe()
     for i in range(6):
         pos=randint(0,17)
-        equipe.add_pokemon(Type(pokemons[pos],1,pokemons[pos]))
+        second_type=randint(0,17)
+        equipe.add_pokemon(Type(pokemons[pos],1,pokemons[pos],pokemons[second_type]))
     return equipe
             
 debutX=95
@@ -139,12 +140,11 @@ while running:
             poke_choose=pokemon
     screen.blit(attaque,(0,0))
     if not combat.winner_name():
-        space=0
         affiche_poke_info(200,0,poke_choose_adverse)
         affiche_poke_info(200,200,poke_choose)
- 
         affiche_equipe(0,50,equipeadverse)
         affiche_equipe(0,250,equipe)
+        
         for attaque_info in poke_choose.get_attaques():
             attaque_infos = font.render(attaque_info[0], True, pygame.Color((182,122,87)))
             screen.blit(attaque_infos,(attaque_info[2][0]-attaque_infos.get_width()/2,attaque_info[2][1]))
@@ -160,6 +160,9 @@ while running:
                     combat.play("3")
                 elif pygame.mouse.get_pos()[0] in range(457,651) and pygame.mouse.get_pos()[1] in range(470,540):
                     combat.play("4")
+        if combat.winner()==poke_choose:
+            poke_choose.exper()
+            poke_choose.evolution()
     else:
         screen.blit(background,(0,0))
         pokemon_image=pygame.image.load(combat.winner().get_image())
@@ -171,7 +174,6 @@ while running:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                     if pygame.mouse.get_pos()[0] in range(181,360) and pygame.mouse.get_pos()[1] in range(470,540):
-                        choose=0
                         if combat.winner()==poke_choose:
                             poke_choose.exper()
                             poke_choose.evolution()
